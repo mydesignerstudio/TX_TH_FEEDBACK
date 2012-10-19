@@ -51,7 +51,7 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		
 		
 		$content = '
-		<hr /><p># tx_th_feedback</p>
+		<hr /><p># tx_th_feedback goes here</p>
 		';
 	
 		return $this->pi_wrapInBaseClass($content);
