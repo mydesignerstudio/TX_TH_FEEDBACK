@@ -36,7 +36,7 @@ $(document).ready(function() {
 	$('#btn_yes').click(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 1;
-		$.ajax({url:"db_update.php",data: "comment=" + comment + "helpful=" + helpful,type: "GET",async:false,success:function(result){
+		$.ajax({datatype:"php",url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "helpful=" + helpful,type: "GET",async:false,success:function(result){
 		$('#feedback_form').html('Thanks for your feedback.<input type="button" class="hidden_button" />');
 		}}); // ".ajax"
 	}); // end of ".click"
@@ -45,7 +45,7 @@ $(document).ready(function() {
 	$('#btn_no').click(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 0;
-		$.ajax({url:"db_update.php",data: "comment=" + comment + "helpful=" + helpful,type: "GET",async:false,success:function(result){
+		$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "helpful=" + helpful,type: "GET",async:false,success:function(result){
 		$('#feedback_form').html('Thanks for your feedback.<input type="button" class="hidden_button" />');
 		}}); // ".ajax"
 	}); // end of ".click"
@@ -59,7 +59,7 @@ $(document).ready(function() {
 			$('input[name="textfield"]').val('Comment missing..');
 		}
 		else {
-			$.ajax({url:"db_update.php",data: "comment=" + comment,type: "GET",async:false,success:function(result){
+			$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment,type: "GET",async:false,success:function(result){
 			$('#feedback_form').html('Thanks for your feedback. <input type="button" class="hidden_button" />');
 			}}); // ".ajax"
 		}
