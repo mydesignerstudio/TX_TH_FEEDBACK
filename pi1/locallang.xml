@@ -6,11 +6,29 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="list_mode_1">Mode 1</label>
-			<label index="list_mode_2">Mode 2</label>
-			<label index="list_mode_3">Mode 3</label>
-			<label index="back">Back</label>
-			<label index="submit_button_label">Click here to submit value</label>
+			<label index="message_thanks">Thanks for your feedback.</label>
+			<label index="message_missing">Comment missing..</label>
+			<label index="feedback_label">Feedback</label>
+			<label index="feedback_text">Was this post helpful?</label>
+			<label index="btn_yes">Yes</label>
+			<label index="btn_no">No</label>
+			<label index="btn_yesbut">Yes, but..</label>
+			<label index="btn_go">Go!</label>
+			<label index="input_note">Your comment</label>
+			<label index="message_duplicate">We have your feedback, thanks.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="message_thanks">Danke fÃœr Ihr Feedback..</label>
+			<label index="message_missing">Kommentar fehlt..</label>
+			<label index="feedback_label">Feedback</label>
+			<label index="feedback_text">War dieser Beitrag hilfreich?</label>
+			<label index="btn_yes">Ja</label>
+			<label index="btn_no">Nein</label>
+			<label index="btn_yesbut">Ja, aber..</label>
+			<label index="btn_go">Los!</label>
+			<label index="input_note">Ihr Kommentar</label>
+			<label index="message_duplicate">Wir haben Ihr Feedback, danke.</label>
 		</languageKey>
 	</data>
 </T3locallang>
+

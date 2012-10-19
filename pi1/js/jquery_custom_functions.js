@@ -39,7 +39,13 @@ $(document).ready(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 1;
 		$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
-		$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
+		// condition message for duplicate ip entry
+		if (result == 'duplicate_yes') {
+			$('#feedback_form').html(message_duplicate + '<input type="button" class="hidden_button" />');	
+		}
+		else {
+			$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
+		}
 		}}); // ".ajax"
 	}); // end of ".click"
 	
@@ -48,8 +54,13 @@ $(document).ready(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 0;
 		$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
-		$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
-		}}); // ".ajax"
+		// condition message for duplicate ip entry
+		if (result == 'duplicate_yes') {
+			$('#feedback_form').html(message_duplicate + '<input type="button" class="hidden_button" />');	
+		}
+		else {
+			$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
+		}		}}); // ".ajax"
 	}); // end of ".click"
 
 	/** BTN PRESSED YES, BUT.. (GO!) -> AJAX XHTTP SERVER REQUEST **/
@@ -63,7 +74,13 @@ $(document).ready(function() {
 			var comment = $('input[name="textfield"]').val();
 			var helpful = 2;
 			$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
-			$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
+			// condition message for duplicate ip entry
+			if (result == 'duplicate_yes') {
+				$('#feedback_form').html(message_duplicate + '<input type="button" class="hidden_button" />');	
+			}
+			else {
+				$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
+			}																																																						
 			}}); // ".ajax"
 		}
 	}); // end of ".click"		

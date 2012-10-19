@@ -61,16 +61,16 @@ class tx_thfeedback_pi1 extends tslib_pibase {
         $this->page_title  = $GLOBALS['TSFE']->page['title'];
 	
 		# language translations
-		$message_thanks    = '(EN) Thanks..'; // thank you for feedback
-		$message_missing   = '(EN) Missing..'; // comment missing
-		$feedback_label    = 'Feedback'; // thank you for feedback
-		$feedback_text     = 'Was this post helpful?'; // comment missing		
-		$btn_yes           = 'Yes'; // thank you for feedback
-		$btn_no            = 'No'; // comment missing
-		$btn_yesbut        = 'Yes, but..'; // thank you for feedback
-		$btn_go            = 'Go!'; // comment missing
-		$input_note        = 'Your comment'; // comment missing
-
+		$message_thanks    = $this->pi_getLL('message_thanks');
+		$message_missing   = $this->pi_getLL('message_missing');
+		$feedback_label    = $this->pi_getLL('feedback_label');
+		$feedback_text     = $this->pi_getLL('feedback_text');
+		$btn_yes           = $this->pi_getLL('btn_yes');
+		$btn_no            = $this->pi_getLL('btn_no');
+		$btn_yesbut        = $this->pi_getLL('btn_yesbut');
+		$btn_go            = $this->pi_getLL('btn_go');
+		$input_note        = $this->pi_getLL('input_note');
+		$message_duplicate = $this->pi_getLL('message_duplicate');
 
 		# js config
 		$animate_form      = 'yes';// yes / no
@@ -94,6 +94,7 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$content .= "var message_missing = '".$message_missing."';";
 		$content .= "var page_id = '".$page_id."';";
 		$content .= "var page_title = '".$page_title."';";
+		$content .= "var message_duplicate = '".$message_duplicate."';";
 		$content .= '</script>';
 				
 		$content .= '<hr />';
@@ -109,7 +110,7 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$content .= '</div><!-- #feedback_form -->';
 		$content .= '<div id="feedback_label" class="'.$feedback_label_class.'">'.$feedback_label.'<input type="button" class="hidden_button" /></div>';
 		$content .= '</form>';
-		$content .= '</div><!-- #form_area --><!-- #feedback_area 2 -->';
+		$content .= '</div><!-- #form_area -->';
 		$content .= '<br /><br />';
 
 
