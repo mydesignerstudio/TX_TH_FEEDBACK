@@ -25,7 +25,9 @@ $duplicate_ip;
 #######################################################  DB  >  UPDATE
 // variables
 $helpful             =  $_GET['helpful'];
-$comment             =   htmlentities($_GET['comment'], ENT_QUOTES, "UTF-8");  
+$comment             =  htmlentities($_GET['comment'], ENT_QUOTES, "UTF-8");
+$page_id             =  $_GET['page_id'];
+$page_title          =  $_GET['page_title'];
 $user_ip             =  '31.47.4.128'; //$_SERVER['REMOTE_ADDR'];
 $timestamp           =  time(); // collect unix timestamp
 $typo_page_id        =  0;
@@ -49,8 +51,8 @@ $sql  =  "INSERT INTO $db_table
 		  )
 		  VALUES
 		  (
-			  7,
-			  'Test Titel',
+			  '$page_id',
+			  '$page_title',
 			  '$helpful',
 			  '$comment',
 			  '$user_ip',

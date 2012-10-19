@@ -56,10 +56,13 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_2'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery_custom_functions.js"></script>';
 	
 	
+	    #get page id
+        $this->page_id     = $GLOBALS['TSFE']->id;
+        $this->page_title  = $GLOBALS['TSFE']->page['title'];
+	
 		# language translations
 		$message_thanks    = '(EN) Thanks..'; // thank you for feedback
 		$message_missing   = '(EN) Missing..'; // comment missing
-		
 		$feedback_label    = 'Feedback'; // thank you for feedback
 		$feedback_text     = 'Was this post helpful?'; // comment missing		
 		$btn_yes           = 'Yes'; // thank you for feedback
@@ -71,6 +74,8 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 
 		# js config
 		$animate_form      = 'yes';// yes / no
+		$page_id           = $this->page_id;
+		$page_title        = $this->page_title;
 		
 		# content start
 		$content  = '';
@@ -87,6 +92,8 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		}
 		$content .= "var message_thanks = '".$message_thanks."';";
 		$content .= "var message_missing = '".$message_missing."';";
+		$content .= "var page_id = '".$page_id."';";
+		$content .= "var page_title = '".$page_title."';";
 		$content .= '</script>';
 				
 		$content .= '<hr />';
@@ -110,10 +117,14 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		
 		# end :: content
 		
+
+		
 	}
 }
 
-
+#t3lib_div::debug($GLOBALS['TSFE']->config,'AKIN WILL DIE PAGE CONFIG SEHEN :)');
+# echo 'title: '.$GLOBALS['TSFE']->page['title'];
+#ausgabe des gesamten oder teile von $GLOBALS['TSFE']
 
 if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/th_feedback/pi1/class.tx_thfeedback_pi1.php'])) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/th_feedback/pi1/class.tx_thfeedback_pi1.php']);
