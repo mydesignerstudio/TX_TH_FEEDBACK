@@ -55,26 +55,60 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_1'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery.js"></script>';
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_2'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery_custom_functions.js"></script>';
 	
-		# content
-		$content = '';
+	
+		# language translations
+		$message_thanks    = '(EN) Thanks..'; // thank you for feedback
+		$message_missing   = '(EN) Missing..'; // comment missing
+		
+		$feedback_label    = 'Feedback'; // thank you for feedback
+		$feedback_text     = 'Was this post helpful?'; // comment missing		
+		$btn_yes           = 'Yes'; // thank you for feedback
+		$btn_no            = 'No'; // comment missing
+		$btn_yesbut        = 'Yes, but..'; // thank you for feedback
+		$btn_go            = 'Go!'; // comment missing
+		$input_note        = 'Your comment'; // comment missing
+
+
+		# js config
+		$animate_form      = 'yes';// yes / no
+		
+		# content start
+		$content  = '';
+		$content .= '<script language="Javascript">';		
+		if($animate_form == 'no') {
+			$content .= "var animate_form = 'no';";
+			$feedback_label_class = 'feedback_label_hidden';
+			$feedback_form_class = 'feedback_form_visible';
+		}
+		else {
+			$content .= "var animate_form = 'yes';";
+			$feedback_label_class = 'feedback_label_visible';
+			$feedback_form_class = 'feedback_form_hidden';
+		}
+		$content .= "var message_thanks = '".$message_thanks."';";
+		$content .= "var message_missing = '".$message_missing."';";
+		$content .= '</script>';
+				
 		$content .= '<hr />';
 		$content .= '<div class="form_area feedback_area_off">';
 		$content .= '<form id="formId"> ';
-		$content .= '<div id="feedback_form">';
-		$content .= '<span class="initial_text">Was this post helpful?</span>';
-		$content .= '<input type="button" value="Yes" class="btn" id="btn_yes" />';
-		$content .= '<input type="button" value="No" class="btn" id="btn_no" />';
-		$content .= '<input type="button" value="Yes, but.." class="btn" id="btn_yesbut" />';
-		$content .= '<span id="comment" class="hidden"><input type="text" value="Your comment" id="textfield" name="textfield" />';
-		$content .= '<input type="button" value="Go!" class="btn" id="btn_go" /></span>';
+		$content .= '<div id="feedback_form" class="'.$feedback_form_class.'">';
+		$content .= '<span class="initial_text">'.$feedback_text.'</span>';
+		$content .= '<input type="button" value="'.$btn_yes.'" class="btn" id="btn_yes" />';
+		$content .= '<input type="button" value="'.$btn_no.'" class="btn" id="btn_no" />';
+		$content .= '<input type="button" value="'.$btn_yesbut.'" class="btn" id="btn_yesbut" />';
+		$content .= '<span id="comment" class="hidden"><input type="text" value="'.$input_note.'" id="textfield" name="textfield" />';
+		$content .= '<input type="button" value="'.$btn_go.'" class="btn" id="btn_go" /></span>';
 		$content .= '</div><!-- #feedback_form -->';
-		$content .= '<div id="feedback_label" class="feedback_label">Feedback<input type="button" class="hidden_button" /></div>';
+		$content .= '<div id="feedback_label" class="'.$feedback_label_class.'">'.$feedback_label.'<input type="button" class="hidden_button" /></div>';
 		$content .= '</form>';
 		$content .= '</div><!-- #form_area --><!-- #feedback_area 2 -->';
 		$content .= '<br /><br />';
 
 
 		return $this->pi_wrapInBaseClass($content);
+		
+		# end :: content
 		
 	}
 }

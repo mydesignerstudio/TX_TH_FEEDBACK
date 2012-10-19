@@ -10,17 +10,19 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 $(document).ready(function() {
 
-	/** FADE FORM IN **/
-	$('.feedback_area').mouseenter(function() {
-		$('#feedback_label').fadeOut(0);
-		$('#feedback_form').fadeIn(200);
-	}); // end of ".mouseenter"
-	
-	/** FADE FORM OUT **/
-	$('.feedback_area').mouseleave(function() {	
-		$('#feedback_form').fadeOut(0);
-		$('#feedback_label').fadeIn(200);
-	}); // end of ".mouseleave"
+	/** FADE FORM IN **/	
+	if (animate_form != 'no') {
+		$('.feedback_area').mouseenter(function() {
+			$('#feedback_label').fadeOut(0);
+			$('#feedback_form').fadeIn(200);
+		}); // end of ".mouseenter"
+		
+		/** FADE FORM OUT **/
+		$('.feedback_area').mouseleave(function() {	
+			$('#feedback_form').fadeOut(0);
+			$('#feedback_label').fadeIn(200);
+		}); // end of ".mouseleave"
+	} // end if (animate_form)
 
 	/** TOGGLE COMMENT FORM **/
 	$('#btn_yesbut').click(function() {	
@@ -37,7 +39,7 @@ $(document).ready(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 1;
 		$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful,type: "GET",async:false,success:function(result){
-		$('#feedback_form').html('Thanks for your feedback.<input type="button" class="hidden_button" />');
+		$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
 		}}); // ".ajax"
 	}); // end of ".click"
 	
@@ -46,21 +48,22 @@ $(document).ready(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 0;
 		$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful,type: "GET",async:false,success:function(result){
-		$('#feedback_form').html('Thanks for your feedback.<input type="button" class="hidden_button" />');
+		$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
 		}}); // ".ajax"
 	}); // end of ".click"
 
 	/** BTN PRESSED YES, BUT.. (GO!) -> AJAX XHTTP SERVER REQUEST **/
 	$('#btn_go').click(function() {
+		var comment = $('input[name="textfield"]').val();					
 		if (comment == '') {
 			$('#textfield').addClass('text_warning');
-			$('input[name="textfield"]').val('Comment missing..');
+			$('input[name="textfield"]').val(message_missing);
 		}
 		else {
 			var comment = $('input[name="textfield"]').val();
 			var helpful = 2;
 			$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment,type: "GET",async:false,success:function(result){
-			$('#feedback_form').html('Thanks for your feedback. <input type="button" class="hidden_button" />');
+			$('#feedback_form').html(message_thanks + '<input type="button" class="hidden_button" />');
 			}}); // ".ajax"
 		}
 	}); // end of ".click"		

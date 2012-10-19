@@ -23,6 +23,8 @@
 
 /* ////////////////  FEEDBACK FORM  //////////////// */
 #feedback_form {display:none;height:32px;border:0px solid #00f;position:absolute;top:0;left:0;}
+#feedback_form.feedback_form_visible {display:block;visibility:visible;}
+.feedback_label_hidden {display:none;}
 
 /* ////////////////  FORM AREA (INNER)  //////////////// */
 .form_area {background:#fff;position:relative;height:32px;}
