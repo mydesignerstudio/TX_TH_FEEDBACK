@@ -36,7 +36,6 @@ $(document).ready(function() {
 	$('#btn_yes').click(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 1;
-		$.ajax({datatype:"php",url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "helpful=" + helpful,type: "GET",async:false,success:function(result){
 		$('#feedback_form').html('Thanks for your feedback.<input type="button" class="hidden_button" />');
 		}}); // ".ajax"
 	}); // end of ".click"

@@ -3,8 +3,8 @@
 // DATABASE CONFIGURATION
 error_reporting(E_ALL);
 define('MYSQL_HOST','localhost');
-define('MYSQL_USER','typo3center');
-define('MYSQL_PASS','mypass2011');
+define('MYSQL_USER','root');
+define('MYSQL_PASS','');
 define('MYSQL_DATABASE','md_cms_typo3center');
 
 // start connection
@@ -17,16 +17,16 @@ $db_selection = mysql_select_db(MYSQL_DATABASE) OR
 
 #######################################################  DB  >  CONFIGURATION
 // define database table
-$db_table  =  "tx_th_feedback";
+$db_table  =  "th_feedback";
 
 #######################################################  DB  >  CHECK FOR DUPLICATE IP
 $duplicate_ip;
 
 #######################################################  DB  >  UPDATE
 // variables
-$helpful             =  $_GET['helpful'];;
-$comment             =  $_GET['comment'];
-$user_ip             =  $_SERVER['REMOTE_ADDR'];
+$helpful             =  $_GET['helpful'];
+$comment             =   htmlentities($_GET['comment'], ENT_QUOTES, "UTF-8");  
+$user_ip             =  '31.47.4.128'; //$_SERVER['REMOTE_ADDR'];
 $timestamp           =  time(); // collect unix timestamp
 $typo_page_id        =  0;
 $typo_content_id     =  0;
@@ -35,22 +35,24 @@ $typo_page_title     =  '';
 if ($user_ip == '31.47.4.128') echo 'Wir haben Ihr Feedback bereits, danke!';
 if ($user_ip != '31.47.4.128') echo 'Danke f&uuml;r Ihr Feedback.';
 
-/*
+
 // do database query
 $sql  =  "INSERT INTO $db_table
 		  (
 			  typo_page_id,
 			  typo_page_title,
 			  helpful,
+			  comment,
 			  user_ip,
 			  lastmod,
 			  received
 		  )
 		  VALUES
 		  (
-			  '',
-			  '',
+			  7,
+			  'Test Titel',
 			  '$helpful',
+			  '$comment',
 			  '$user_ip',
 			  '$timestamp',
 			  '$timestamp'
@@ -58,7 +60,7 @@ $sql  =  "INSERT INTO $db_table
 		  OR die(mysql_error());
 
 $results  =  mysql_query($sql) OR die(mysql_error());
-*/
+
 
 #echo "Daten wurden in die Datenbank eingef&uuml;gt<br />\n";;
 #echo 'yes';

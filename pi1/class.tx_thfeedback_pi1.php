@@ -55,8 +55,9 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_1'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery.js"></script>';
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_2'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery_custom_functions.js"></script>';
 	
+		# content
 		$content = '';
-		$content .= '<p><strong>OPTION 2</strong>: Hover over feedback area (see dotted line)</p>';
+		$content .= '<hr />';
 		$content .= '<div class="form_area feedback_area_off">';
 		$content .= '<form id="formId"> ';
 		$content .= '<div id="feedback_form">';
