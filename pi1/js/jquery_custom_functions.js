@@ -11,13 +11,13 @@
 $(document).ready(function() {
 
 	/** FADE FORM IN **/
-	$('#feedback_area').mouseenter(function() {
+	$('.feedback_area').mouseenter(function() {
 		$('#feedback_label').fadeOut(0);
 		$('#feedback_form').fadeIn(200);
 	}); // end of ".mouseenter"
 	
 	/** FADE FORM OUT **/
-	$('#feedback_area').mouseleave(function() {	
+	$('.feedback_area').mouseleave(function() {	
 		$('#feedback_form').fadeOut(0);
 		$('#feedback_label').fadeIn(200);
 	}); // end of ".mouseleave"

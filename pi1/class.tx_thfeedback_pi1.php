@@ -49,11 +49,30 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		
-		
-		$content = '
-		<hr /><p># tx_th_feedback goes here</p>
-		';
+		# load external css / js in via additionalHeaderData()
+		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/css_1'] = '<link href="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/css/main.css" rel="stylesheet" type="text/css" />';
+		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/css_2'] = '<link href="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/css/ui_whitesolid.css" rel="stylesheet" type="text/css" />';
+		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_1'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery.js"></script>';
+		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_2'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery_custom_functions.js"></script>';
 	
+		$content = '';
+		$content .= '<p><strong>OPTION 2</strong>: Hover over feedback area (see dotted line)</p>';
+		$content .= '<div class="form_area feedback_area">';
+		$content .= '<form id="formId"> ';
+		$content .= '<div id="feedback_form">';
+		$content .= '<span class="initial_text">Was this post felpful?</span>';
+		$content .= '<input type="button" value="Yes" class="btn" id="btn_yes" />';
+		$content .= '<input type="button" value="No" class="btn" id="btn_no" />';
+		$content .= '<input type="button" value="Yes, but.." class="btn" id="btn_yesbut" />';
+		$content .= '<span id="comment" class="hidden"><input type="text" value="Your comment" id="textfield" name="textfield" />';
+		$content .= '<input type="button" value="Go!" class="btn" id="btn_go" /></span>';
+		$content .= '</div><!-- #feedback_form -->';
+		$content .= '<div id="feedback_label" class="feedback_label">Feedback<input type="button" class="hidden_button" /></div>';
+		$content .= '</form>';
+		$content .= '</div><!-- #form_area --><!-- #feedback_area 2 -->';
+		$content .= '<br /><br />';
+
+
 		return $this->pi_wrapInBaseClass($content);
 		
 	}
