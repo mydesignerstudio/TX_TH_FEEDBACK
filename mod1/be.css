@@ -1,0 +1,50 @@
+/********************** Basic Styles */
+body,html {background:#fff;margin:20px;padding:0;font-family:tahoma, verdana, arial, helvetica, sans-serif;font-size:14px;color:#666;}
+tr, td, th, h1 {
+	font-family:tahoma, verdana, arial, helvetica, sans-serif;
+	font-size: 14px;
+	color: #58595B;
+   vertical-align:middle;
+}
+td.row_1 {
+	background-color: #fff;
+   height:22px;
+}
+td.row_2 {
+	background-color: #F2F2F2;
+   height:22px;
+}
+hr {
+    height:1px;
+    color:#dfdede;
+    background-color:#dfdede;
+    margin:10px 0px 10px 0px;
+    border:0px solid #ccc;
+}
+.padding{padding:30px;}
+
+/********************** Link Styles */
+a:link, a:visited {
+	 font-family:tahoma, verdana, arial, helvetica, sans-serif;
+	 padding: 0px;
+	 margin: 0px;
+	 color: #0099ff;
+	 background-color: transparent;
+    text-decoration:none;
+    }
+a:hover, a:visited:hover, a:active:hover {
+    color:#0099ff;
+    text-decoration:none;
+    }
+
+div.row {font-weight:normal;width:90px;display:inline;float:left;border:0px solid #ccc;padding:2px;margin-top:10px;background:#F2F2F2;margin-left:2px;}
+div.row_title {font-weight:bold;margin:0;margin-left:2px;}
+div.row_text {width:180px;}
+div.float_clear{clear:both;}
+div.comment{margin-right:10px;margin-top:10px;padding:10px;font-weight:normal;width:280px;border:1px solid #ccc;float:left;display:none;}
+div.th_container{min-width:1000px;}
+.btn_comment{cursor:pointer;}
+.date {font-size:11px;color:#999;}
+.ip {font-size:11px;color:#ccc;}
+span {color:#999;}
+a.th_link_year:link, a.th_link_year:visited {margin-left:20px;}
