@@ -11,9 +11,8 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'TYPOHOSTING.AT Feedback',
-	'description' => 'When i saw this feedback form the first time on stackoverflow.com, i knew that\'s what i wanted for my
- web projects. so why not make one for typo. i got it up and running and even extended it with a cool "yes, but.." comment field.',
+	'title' => 'TH-Feedback Ajax Based',
+	'description' => 'Displays an ajax-based mini form like "was this post useful? yes / no / yes, but.." and keeps track of the feedback in an external statistics html file.',
 	'category' => 'plugin',
 	'author' => 'Akin Ajewole',
 	'author_email' => 'info@typohosting.at',
