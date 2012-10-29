@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 define('MYSQL_HOST','localhost');
 define('MYSQL_USER','root');
 define('MYSQL_PASS','');
-define('MYSQL_DATABASE','md_cms_typo3center');
+define('MYSQL_DATABASE','md_cms');
 
 // start connection
 $db_connection = @mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASS) OR
@@ -26,14 +26,14 @@ $timestamp           =  time(); // collect unix timestamp
 
 #######################################################  DB  >  CONFIGURATION
 // define database table
-$db_table  =  "th_feedback";
+$db_table  =  "tx_th_feedback";
 
 #######################################################  DB  >  CHECK FOR DUPLICATE IP
 $sql      =  "SELECT * FROM $db_table WHERE user_ip='$user_ip' AND typo_page_id='$typo_page_id' ";
 $results  =  mysql_query($sql) OR die(mysql_error());
 $numRows  =  mysql_num_rows($results);
 
-if ($numRows > 0) {
+if ($numRows < 0) {
 	#echo 'numRows: '.$numRows.'<br />';
 	echo 'duplicate_yes';
 }
