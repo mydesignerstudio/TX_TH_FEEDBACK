@@ -96,7 +96,9 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 					}); // end of ".ready"
 				}
 				</script>
+				<link href="http://fonts.googleapis.com/css?family=lato:900,400,300,100" rel="stylesheet" type="text/css">
 				<link rel="stylesheet" href="../typo3conf/ext/th_feedback/mod1/be.css" type="text/css" />
+
 				
 			';
 			$this->doc->postCode = '
@@ -159,9 +161,26 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 	 * @return void
 	 */
 	protected function moduleContent() {
-		
-		echo '<img src="../typo3conf/ext/th_feedback/mod1/moduleicon.gif" /> <strong>TH FEEDBACK STATISTIK</strong>'.'<br /><br /><br />';
-		echo 'Choose a year: <a class="th_link_year" href="#">2010</a><a class="th_link_year" href="#">2011</a><a class="th_link_year" href="#">2012</a>'.'<br /><br />';
+		// -------------------------------
+		// language translations
+		// -------------------------------
+		#$title_yes                  =  parent::pi_getLL('title_yes');
+		$LL_title_header             =  $GLOBALS['LANG']->getLL('title_header');
+		$LL_title_top                =  $GLOBALS['LANG']->getLL('title_top');
+		$LL_title_page_id            =  $GLOBALS['LANG']->getLL('title_page_id');
+		$LL_title_page_title         =  $GLOBALS['LANG']->getLL('title_page_title');
+		$LL_title_yes                =  $GLOBALS['LANG']->getLL('title_yes');
+		$LL_title_no                 =  $GLOBALS['LANG']->getLL('title_no');
+		$LL_title_yesbut             =  $GLOBALS['LANG']->getLL('title_yesbut');
+		$LL_title_total              =  $GLOBALS['LANG']->getLL('title_total');
+		$LL_title_comments           =  $GLOBALS['LANG']->getLL('title_comments');
+		$LL_title_choosetimeframe    =  $GLOBALS['LANG']->getLL('title_choosetimeframe');
+		$LL_title_poweredby          =  $GLOBALS['LANG']->getLL('title_poweredby');
+		$LL_btn_viewcomments         =  $GLOBALS['LANG']->getLL('btn_viewcomments');
+
+
+		echo '<img src="../typo3conf/ext/th_feedback/mod1/moduleicon.gif" /> <p class="th_header">'.$LL_title_header.'</p>'.'<br /><br /><br />';
+		echo $LL_title_choosetimeframe.': <a class="th_link_year" href="#">2010</a><a class="th_link_year" href="#">2011</a><a class="th_link_year" href="#">2012</a>'.'<br /><br />';
 		
 		
 		#$content = 'Akin was here :)';
@@ -340,10 +359,9 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		#print_r($array_pages_results);
 		#echo '</pre>';
 	
-	
 		// print html css table
 		$content  = '<div class="th_container"><div id="statistics">';
-		$content .= '<div class="row row_title">TOP</div><div class="row row_title">PID</div><div class="row row_title row_text">TITLE</div><div class="row row_title">YES</div><div class="row row_title">NO</div><div class="row row_title">YES, BUT</div><div class="row row_title">TOTAL</div><div class="row row_title row_text">COMMENTS</div><div class="float_clear"></div></div>';
+		$content .= '<div class="row row_title">'.$LL_title_top.'</div><div class="row row_title">'.$LL_title_page_id.'</div><div class="row row_title row_text">'.$LL_title_page_title.'</div><div class="row row_title">'.$LL_title_yes.'</div><div class="row row_title">'.$LL_title_no.'</div><div class="row row_title">'.$LL_title_yesbut.'</div><div class="row row_title">'.$LL_title_total.'</div><div class="row row_title row_text">'.$LL_title_comments.'</div><div class="float_clear"></div></div>';
 		
 		$r_comments ='';
 		$r_i=1; // rank incrementer
@@ -379,7 +397,7 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		
 			// print html css table
 			$content .= '<div class="th_container"><div class="row">'.$r_i.'</div><div class="row">'.$r_pid.'</div><div class="row row_text">'.$r_title.'</div><div class="row">'.$r_yes.' <span>('.$r_percent_yes.')%</span></div><div class="row">'.$r_no.' <span>('.$r_percent_no.')%</span></div><div class="row">'.$r_yesbut.' <span>('.$r_percent_yesbut.')%</span></div><div class="row">'.$r_votes.'</div><div class="row row_text">
-			<a onclick="openComment('.$btn_i.');" class="btn_comment" id="btn_'.$btn_i.'">'.$text_viewcomments.'</a>&nbsp;</div><div class="float_clear"></div>'.$r_comments.'<div class="float_clear"></div></div>';
+			<a onclick="openComment('.$btn_i.');" class="btn_comment" id="btn_'.$btn_i.'">'.$LL_btn_viewcomments.'</a>&nbsp;</div><div class="float_clear"></div>'.$r_comments.'<div class="float_clear"></div></div>';
 		
 			// increment ranking top counter
 			$r_i++;
@@ -391,7 +409,7 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		// print contents
 		echo $content.'<br /><br /><br />';
 		
-		echo 'powered by <a href="http://www.typohosting.at" target="_blank">TYPOHOSTING.AT</a>';
+		echo '<a href="http://www.typohosting.at" target="_blank"><img src="../typo3conf/ext/th_feedback/mod1/poweredby.png" width="175" height="16" /></a>';
 
 	}	
 }

@@ -1,7 +1,7 @@
 /********************** Basic Styles */
-body,html {background:#fff;margin:20px;padding:0;font-family:tahoma, verdana, arial, helvetica, sans-serif;font-size:14px;color:#666;}
+body,html {background:#fff;margin:20px;padding:0;font-family: 'lato', sans-serif;font-size: 28px;font-weight:300;font-size:14px;color:#666;}
 tr, td, th, h1 {
-	font-family:tahoma, verdana, arial, helvetica, sans-serif;
+	font-family: 'lato', sans-serif;
 	font-size: 14px;
 	color: #58595B;
    vertical-align:middle;
@@ -25,7 +25,7 @@ hr {
 
 /********************** Link Styles */
 a:link, a:visited {
-	 font-family:tahoma, verdana, arial, helvetica, sans-serif;
+	 font-family: 'lato', sans-serif;
 	 padding: 0px;
 	 margin: 0px;
 	 color: #0099ff;
@@ -43,8 +43,12 @@ div.row_text {width:180px;}
 div.float_clear{clear:both;}
 div.comment{margin-right:10px;margin-top:10px;padding:10px;font-weight:normal;width:280px;border:1px solid #ccc;float:left;display:none;}
 div.th_container{min-width:1000px;}
-.btn_comment{cursor:pointer;}
+.btn_comment{cursor:pointer;color:#999;}
 .date {font-size:11px;color:#999;}
 .ip {font-size:11px;color:#ccc;}
 span {color:#999;}
 a.th_link_year:link, a.th_link_year:visited {margin-left:20px;}
+
+.th_header{
+font-family: 'lato', sans-serif;font-size: 28px;font-weight:900;padding-left:20px;
+}
