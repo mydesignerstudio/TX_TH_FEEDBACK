@@ -48,19 +48,36 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
-		
-		# load external css / js in via additionalHeaderData()
+
+
+		// th config
+		require t3lib_extMgm::siteRelPath ( $this->extKey ) .'/th_config.php';
+
+		/********************************
+		*
+		*  HTML/XML PROCESSING
+		*
+		*  1. do this
+		*  2. do this
+		*  3. do this
+		*
+		********************************/
+
+		/********************************
+		//  1. do this
+		********************************/
+
+		// -------------------------------
+		// load external css / js
+		// -------------------------------
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/css_1'] = '<link href="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/css/main.css" rel="stylesheet" type="text/css" />';
-		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/css_2'] = '<link href="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/css/ui_green.css" rel="stylesheet" type="text/css" />';
+		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/css_2'] = '<link href="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/css/ui_'.$config_css.'.css" rel="stylesheet" type="text/css" />';
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_1'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery.js"></script>';
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_2'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery_custom_functions.js"></script>';
 	
-	
-	    #get page id
-        $this->page_id     = $GLOBALS['TSFE']->id;
-        $this->page_title  = $GLOBALS['TSFE']->page['title'];
-	
-		# language translations
+		// -------------------------------
+		// language translations
+		// -------------------------------
 		$message_thanks    = $this->pi_getLL('message_thanks');
 		$message_missing   = $this->pi_getLL('message_missing');
 		$feedback_label    = $this->pi_getLL('feedback_label');
@@ -72,15 +89,34 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$input_note        = $this->pi_getLL('input_note');
 		$message_duplicate = $this->pi_getLL('message_duplicate');
 
-		# js config
-		$animate_form      = 'yes';// yes / no
+		// -------------------------------
+		// retreive get / post
+		// -------------------------------
+	    #get page id
+        $this->page_id     = $GLOBALS['TSFE']->id;
+        $this->page_title  = $GLOBALS['TSFE']->page['title'];
+		
+		// format css class for custom hover area
+		if ($config_custom_hoverarea == 'no') $config_custom_hoverarea = '';
+
+		/**
+		 *
+		 * @var string
+		 */
 		$page_id           = $this->page_id;
+		
+		/**
+		 *
+		 * @var string
+		 */
 		$page_title        = $this->page_title;
 		
-		# content start
+		// -------------------------------
+		// content start
+		// -------------------------------
 		$content  = '';
 		$content .= '<script language="Javascript">';		
-		if($animate_form == 'no') {
+		if($config_animate_form == 'no') {
 			$content .= "var animate_form = 'no';";
 			$feedback_label_class = 'feedback_label_hidden';
 			$feedback_form_class = 'feedback_form_visible';
@@ -98,7 +134,7 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$content .= '</script>';
 				
 		$content .= '<hr />';
-		$content .= '<div class="form_area feedback_area_off">';
+		$content .= '<div class="form_area feedback_area'.$config_custom_hoverarea.'">';
 		$content .= '<form id="formId"> ';
 		$content .= '<div id="feedback_form" class="'.$feedback_form_class.'">';
 		$content .= '<span class="initial_text">'.$feedback_text.'</span>';
@@ -113,12 +149,14 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		$content .= '</div><!-- #form_area -->';
 		$content .= '<br /><br />';
 
-
+		/**
+		 *
+		 * @param string $content
+		 * @return $content
+		 */
 		return $this->pi_wrapInBaseClass($content);
 		
 		# end :: content
-		
-
 		
 	}
 }
