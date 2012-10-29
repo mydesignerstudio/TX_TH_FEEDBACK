@@ -6,13 +6,32 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="title">TH-Feedback</label>
-			<label index="function1">Function #1</label>
-			<label index="function2">Function #2</label>
-			<label index="function3">Function #3</label>
+			<label index="title_header">TH-FEEDBACK STATISTICS</label>
+			<label index="title_top">TOP</label>
+			<label index="title_page_id">PAGE-ID</label>
+			<label index="title_page_title">PAGE-TITLE</label>
+			<label index="title_yes">YES</label>
+			<label index="title_no">NO</label>
+			<label index="title_yesbut">YES, BUT</label>
+			<label index="title_total">TOTAL</label>
+			<label index="title_comments">COMMENTS</label>
+			<label index="title_choosetimeframe">Choose a timeframe: </label>
+			<label index="title_poweredby">Developed by </label>		
+			<label index="btn_viewcomments">view comments</label>		
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="title">TH-Feedback</label>
+			<label index="title_header">TH-FEEDBACK STATISTIK</label>
+			<label index="title_top">TOP</label>
+			<label index="title_page_id">SEITEN-ID</label>
+			<label index="title_page_title">SEITEN-TITEL</label>
+			<label index="title_yes">JA</label>
+			<label index="title_no">NEIN</label>
+			<label index="title_yesbut">JA, ABER</label>
+			<label index="title_total">GESAMT</label>
+			<label index="title_comments">KOMMENTARE</label>
+			<label index="title_choosetimeframe">Wählen Sie eine Zeitspanne: </label>
+			<label index="title_poweredby">Entwickelt von </label>		
+			<label index="btn_viewcomments">Kommentare ansehen</label>		
 		</languageKey>
 	</data>
 </T3locallang>
