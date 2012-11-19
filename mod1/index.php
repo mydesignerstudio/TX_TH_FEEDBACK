@@ -40,7 +40,6 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 	protected $pageinfo;
 	
 	
-	
 	/**
 	 * Initializes the module.
 	 *
@@ -86,6 +85,9 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 				
 				
 				<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+				<script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+				<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" type="text/css" />
+				
 				<script type="text/javascript">
 				
 				function openComment (number) {
@@ -96,6 +98,14 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 					}); // end of ".ready"
 				}
 				</script>
+				
+				<script>
+				$(function() {
+				  $( "#datepicker1" ).datepicker({dateFormat : "dd.mm.yy"});
+				  $( "#datepicker2" ).datepicker({dateFormat : "dd.mm.yy"});
+				});
+				</script>
+				
 				<link href="http://fonts.googleapis.com/css?family=lato:900,400,300,100" rel="stylesheet" type="text/css">
 				<link rel="stylesheet" href="../typo3conf/ext/th_feedback/mod1/be.css" type="text/css" />
 
@@ -161,6 +171,12 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 	 * @return void
 	 */
 	protected function moduleContent() {
+		// define database table
+		$db_table  =  "tx_th_feedback";
+		$db_pages  =  "pages";
+		$db_pages_trans  =  "pages_language_overlay";
+		$row_counter = '';
+		
 		// -------------------------------
 		// language translations
 		// -------------------------------
@@ -176,12 +192,50 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		$LL_title_comments           =  $GLOBALS['LANG']->getLL('title_comments');
 		$LL_title_choosetimeframe    =  $GLOBALS['LANG']->getLL('title_choosetimeframe');
 		$LL_title_poweredby          =  $GLOBALS['LANG']->getLL('title_poweredby');
+		$title_selectdatetooltip     =  $GLOBALS['LANG']->getLL('title_selectdatetooltip');
 		$LL_btn_viewcomments         =  $GLOBALS['LANG']->getLL('btn_viewcomments');
-
-
-		echo '<img src="../typo3conf/ext/th_feedback/mod1/moduleicon.gif" /> <p class="th_header">'.$LL_title_header.'</p>'.'<br /><br /><br />';
-		echo $LL_title_choosetimeframe.': <a class="th_link_year" href="#">2010</a><a class="th_link_year" href="#">2011</a><a class="th_link_year" href="#">2012</a>'.'<br /><br />';
+		$LL_btn_dateselect           =  $GLOBALS['LANG']->getLL('btn_dateselect');
 		
+
+		# $_GET
+		$date_from = $_GET['datepicker_from'];
+		$date_to   = $_GET['datepicker_to'];
+		
+		$sql_1         = "SELECT * FROM $db_table ORDER BY received LIMIT 0,1";
+		$results_1     =  mysql_query($sql_1) OR die(mysql_error());
+		while ($row_1  =  mysql_fetch_object($results_1)) { // get db data as array
+			// collect db data
+			$received         =  $row_1->received;   
+		}
+		$youngest_date    =  date("d.m.Y",$received);
+		
+		$timestamp  = time();
+		$today_date = date("d.m.Y",$timestamp);
+
+		$date_from_get = $date_from;
+		$date_to_get   = $date_to;
+
+		if(!isset($_GET['datepicker_from'])) $date_from_get = $youngest_date;
+		if(!isset($_GET['datepicker_from'])) $date_to_get   = $today_date;
+
+		if(isset($_GET['datepicker_from'])) {
+			# $date_from
+			$array_date_from = array();
+			$array_date_from = explode(".", $date_from);
+			$date_from = $array_date_from[2].'-'.$array_date_from[1].'-'.$array_date_from[0].' 00:00:00';
+			
+			# $date_to
+			$array_date_to = array();
+			$array_date_to = explode(".", $date_to);
+			$date_to = $array_date_to[2].'-'.$array_date_to[1].'-'.$array_date_to[0].' 23:59:59';
+		}
+
+		echo '<div class="th_container">';
+		echo '<img src="../typo3conf/ext/th_feedback/mod1/moduleicon.gif" /> <p class="th_header">'.$LL_title_header.'</p>'.'<br /><br />';
+		echo '<form action="'.$_SERVER["PHP_SELF"].'" method="get"><strong>'.$LL_title_choosetimeframe.'</strong>';
+		echo '<img src="../typo3conf/ext/th_feedback/mod1/icon_date.gif" title="'.$title_selectdatetooltip.'" /> <input type="text" name="datepicker_from" id="datepicker1" value="'.$date_from_get.'"> <img src="../typo3conf/ext/th_feedback/mod1/icon_date.gif" title="'.$title_selectdatetooltip.'" /> <input type="text" name="datepicker_to" id="datepicker2" value="'.$date_to_get.'"> <input type="hidden" name="M" value="user_txthfeedbackM1"> <input type="submit" value="'.$LL_btn_dateselect.'" name="submit" /> <br /><br /></form>';
+		echo '</div>';
+
 		
 		#$content = 'Akin was here :)';
 		#$this->content .= $content;
@@ -230,9 +284,10 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		
 		
 		#######################################################  DB  >  CONFIGURATION
-		// define database table
-		$db_table  =  "tx_th_feedback";
-		$row_counter = '';
+		if(!isset($_GET['datepicker_from'])) $date_selected = 'no';
+
+
+
 
 		#######################################################  SELECT EXTERNAL DATABASE ENTRY		
 		// --> 1. select distinct page id and save in array
@@ -256,10 +311,22 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		  ''); #limit (startingpoint,amount)
 		*/
 
-			$sql_2                =  "SELECT * FROM $db_table";
-			$results_2            =  mysql_query($sql_2) OR die(mysql_error());
-			while ($row_2         =  mysql_fetch_object($results_2)) { // get db data as array
+		/*
+		if ($date_selected == 'no')  {
+			$sql_2 =  "SELECT * FROM $db_table WHERE received >= '2012-10-19' AND received <= '2012-10-25' ";
+		}
+		else {
+			$sql_2 =  "SELECT * FROM $db_table WHERE received >= '2012-10-19' AND received <= '2012-10-25' ";
+		}
+		*/
 		
+		#$sql_2 =  "SELECT * FROM $db_table";
+		$sql_2 =  "SELECT * FROM $db_table WHERE FROM_UNIXTIME(received)>='$date_from' AND FROM_UNIXTIME(received)<= '$date_to'";
+		if ($date_selected == 'no') $sql_2 =  "SELECT * FROM $db_table";
+		
+		$results_2            =  mysql_query($sql_2) OR die(mysql_error());
+		while ($row_2         =  mysql_fetch_object($results_2)) { // get db data as array
+	
 			// collect db data
 			$db_id            =  $row_2->id; 
 			$typo_page_id     =  $row_2->typo_page_id; 
@@ -310,8 +377,10 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 			  'received DESC', #orderby
 			  ''); #limit (startingpoint,amount)
 			*/
-		
-			$sql_3            =  "SELECT * FROM $db_table WHERE typo_page_id='$pid'";
+
+			#$sql_3            =  "SELECT * FROM $db_table WHERE typo_page_id='$pid'";
+			$sql_3 =  "SELECT * FROM $db_table WHERE FROM_UNIXTIME(received)>='$date_from' AND FROM_UNIXTIME(received)<= '$date_to' AND typo_page_id='$pid' ";
+			if ($date_selected == 'no') $sql_3 =  "SELECT * FROM $db_table WHERE typo_page_id='$pid'";
 			$results_3        =  mysql_query($sql_3) OR die(mysql_error());
 			while ($row_3     =  mysql_fetch_object($results_3)) { // get db data as array
 			
@@ -323,6 +392,35 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 				$comment          =  $row_3->comment;   
 				$user_ip          =  $row_3->user_ip;   
 				$received         =  $row_3->received;   
+				
+				
+				$sql_4            =  "SELECT * FROM $db_pages WHERE uid='$typo_page_id '";
+				#$sql_4            =  "SELECT * FROM $db_table WHERE FROM_UNIXTIME(received)>='2012-10-22' AND FROM_UNIXTIME(received)< '2012-10-30' AND typo_page_id='$pid' ";
+				$results_4        =  mysql_query($sql_4) OR die(mysql_error());
+				$numRows_4        =  mysql_num_rows($results_4);
+				while ($row_4     =  mysql_fetch_object($results_4)) { // get db data as array
+				$typo_page_title  =  $row_4->title;
+				}
+				
+				/*
+				if ($numRows_4 == 0) {
+					$sql_5            =  "SELECT * FROM $db_pages WHERE uid='$typo_page_id'";
+					$results_5        =  mysql_query($sql_5) OR die(mysql_error());
+					while ($row_5     =  mysql_fetch_object($results_5)) { // get db data as array
+					$typo_page_title  =  $row_5->title;
+					}
+				}
+				else {
+					$sql_5            =  "SELECT * FROM $db_pages_trans WHERE pid='$typo_page_id' AND sys_language_uid='1'";
+					$results_5        =  mysql_query($sql_5) OR die(mysql_error());
+					while ($row_5     =  mysql_fetch_object($results_5)) { // get db data as array
+					$typo_page_title  =  $row_5->title;
+					}
+				} // end if else
+				*/
+				
+				
+				
 				
 				// generate gmt date
 				$offset=2*60*60; //converting 5 hours to seconds -> GMT+2
@@ -342,7 +440,12 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 				// increment page counter
 				$counter_pages++;
 			} // end while
+
 			
+			# -- debug2
+			#echo '$numRows_4: '.$numRows_4.'<br />';
+			#echo '$uid: '.$typo_page_id.'<br />';
+
 			// store results in array (page counter)
 			$array_pages_results[$pid]['counter_pages']=$counter_pages;
 			$array_pages_results[$pid]['counter_yes']=$counter_yes;
@@ -386,8 +489,7 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 			} // end if
 			
 			// generate link "view comments"
-			$text_viewcomments = '';
-			if($r_yesbut != 0) $text_viewcomments = 'view comments';
+			if($r_yesbut == 0) $LL_btn_viewcomments = '';
 		
 			// calculate percentages
 			$r_percent_total    = 100; // 100%
@@ -399,10 +501,11 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 			$content .= '<div class="th_container"><div class="row">'.$r_i.'</div><div class="row">'.$r_pid.'</div><div class="row row_text">'.$r_title.'</div><div class="row">'.$r_yes.' <span>('.$r_percent_yes.')%</span></div><div class="row">'.$r_no.' <span>('.$r_percent_no.')%</span></div><div class="row">'.$r_yesbut.' <span>('.$r_percent_yesbut.')%</span></div><div class="row">'.$r_votes.'</div><div class="row row_text">
 			<a onclick="openComment('.$btn_i.');" class="btn_comment" id="btn_'.$btn_i.'">'.$LL_btn_viewcomments.'</a>&nbsp;</div><div class="float_clear"></div>'.$r_comments.'<div class="float_clear"></div></div>';
 		
-			// increment ranking top counter
+			// increment ranking top counter / comments btn
 			$r_i++;
 			$r_comments = '';
 			$btn_i++;
+			$LL_btn_viewcomments = $GLOBALS['LANG']->getLL('btn_viewcomments');
 		}
 		$content  .= '</div>';
 		
@@ -414,11 +517,16 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 	}	
 }
 
-
+		echo '<br />';
+		echo '<pre>';
+		#print_r($GLOBALS['TSFE']->sys_language_uid);
+		#print_r($GLOBALS);
+		echo '</pre>';
 
 if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/th_feedback/mod1/index.php'])) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/th_feedback/mod1/index.php']);
 }
+
 
 
 
