@@ -16,8 +16,10 @@
 			<label index="title_total">TOTAL</label>
 			<label index="title_comments">COMMENTS</label>
 			<label index="title_choosetimeframe">Choose a timeframe: </label>
-			<label index="title_poweredby">Developed by </label>		
+			<label index="title_poweredby">Developed by </label>
+			<label index="title_selectdatetooltip">Click the date field</label>
 			<label index="btn_viewcomments">view comments</label>		
+			<label index="btn_dateselect">view</label>		
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="title_header">TH-FEEDBACK STATISTIK</label>
@@ -31,7 +33,9 @@
 			<label index="title_comments">KOMMENTARE</label>
 			<label index="title_choosetimeframe">Wählen Sie eine Zeitspanne: </label>
 			<label index="title_poweredby">Entwickelt von </label>		
-			<label index="btn_viewcomments">Kommentare ansehen</label>		
+			<label index="title_selectdatetooltip">Klicken Sie ins Datum Feld</label>
+			<label index="btn_viewcomments">Kommentare anzeigen</label>		
+			<label index="btn_dateselect">Anzeigen</label>		
 		</languageKey>
 	</data>
 </T3locallang>
