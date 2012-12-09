@@ -5,7 +5,7 @@
 		<description>Language labels for plugin &quot;tx_thfeedback_pi1&quot;</description>
 	</meta>
 	<data type="array">
-		<languageKey index="de" type="array">
+		<languageKey index="default" type="array">
 			<label index="message_thanks">Thanks for your feedback.</label>
 			<label index="message_missing">Comment missing..</label>
 			<label index="feedback_label">Feedback</label>
@@ -15,11 +15,11 @@
 			<label index="btn_yesbut">Yes, but..</label>
 			<label index="btn_go">Go!</label>
 			<label index="input_note">Your comment</label>
-			<label index="message_duplicate">We have your feedback, thanks.</label>
+			<label index="message_duplicate">We have your feedback already, thanks.</label>
 		</languageKey>
-		<languageKey index="default" type="array">
-			<label index="message_thanks">Danke fÃœr Ihr Feedback..</label>
-			<label index="message_missing">Kommentar fehlt..</label>
+		<languageKey index="de" type="array">
+			<label index="message_thanks">Danke für Ihr Feedback.</label>
+			<label index="message_missing">Kommentar fehlt.</label>
 			<label index="feedback_label">Feedback</label>
 			<label index="feedback_text">War dieser Beitrag hilfreich?</label>
 			<label index="btn_yes">Ja</label>
@@ -27,7 +27,7 @@
 			<label index="btn_yesbut">Ja, aber..</label>
 			<label index="btn_go">Los!</label>
 			<label index="input_note">Ihr Kommentar</label>
-			<label index="message_duplicate">Wir haben Ihr Feedback, danke.</label>
+			<label index="message_duplicate">Wir haben Ihr Feedback bereits, danke.</label>
 		</languageKey>
 	</data>
 </T3locallang>
