@@ -197,27 +197,35 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		$LL_btn_dateselect           =  $GLOBALS['LANG']->getLL('btn_dateselect');
 		
 
-		# $_GET
-		$date_from = $_GET['datepicker_from'];
-		$date_to   = $_GET['datepicker_to'];
 		
 		$sql_1         = "SELECT * FROM $db_table ORDER BY received LIMIT 0,1";
 		$results_1     =  mysql_query($sql_1) OR die(mysql_error());
+		$numRows_1     =  mysql_num_rows($results_1);
 		while ($row_1  =  mysql_fetch_object($results_1)) { // get db data as array
 			// collect db data
-			$received         =  $row_1->received;   
+			$received         =  $row_1->received;
 		}
-		$youngest_date    =  date("d.m.Y",$received);
 		
+		
+		# DATES
+		
+		# date > timestamp
 		$timestamp  = time();
+
+		# date > today
 		$today_date = date("d.m.Y",$timestamp);
 
-		$date_from_get = $date_from;
-		$date_to_get   = $date_to;
-
-		if(!isset($_GET['datepicker_from'])) $date_from_get = $youngest_date;
-		if(!isset($_GET['datepicker_from'])) $date_to_get   = $today_date;
-
+		# date > from
+		$date_from = '01.01.'.date("Y",$timestamp);
+		if (isset($_GET['datepicker_from'])) $date_from = $_GET['datepicker_from'];
+		$datepicker_from = $date_from;
+		
+		# date > to
+		$date_to = $today_date;
+		if (isset($_GET['datepicker_to'])) $date_to = $_GET['datepicker_to'];
+		$datepicker_to = $date_to;
+		
+		# date > covert date submitted via datepicker (. to -) (00-24 h)
 		if(isset($_GET['datepicker_from'])) {
 			# $date_from
 			$array_date_from = array();
@@ -233,7 +241,7 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 		echo '<div class="th_container">';
 		echo '<img src="../typo3conf/ext/th_feedback/mod1/moduleicon.gif" /> <p class="th_header">'.$LL_title_header.'</p>'.'<br /><br />';
 		echo '<form action="'.$_SERVER["PHP_SELF"].'" method="get"><strong>'.$LL_title_choosetimeframe.'</strong>';
-		echo '<img src="../typo3conf/ext/th_feedback/mod1/icon_date.gif" title="'.$title_selectdatetooltip.'" /> <input type="text" name="datepicker_from" id="datepicker1" value="'.$date_from_get.'"> <img src="../typo3conf/ext/th_feedback/mod1/icon_date.gif" title="'.$title_selectdatetooltip.'" /> <input type="text" name="datepicker_to" id="datepicker2" value="'.$date_to_get.'"> <input type="hidden" name="M" value="user_txthfeedbackM1"> <input type="submit" value="'.$LL_btn_dateselect.'" name="submit" /> <br /><br /></form>';
+		echo '<img src="../typo3conf/ext/th_feedback/mod1/icon_date.gif" title="'.$title_selectdatetooltip.'" /> <input type="text" name="datepicker_from" id="datepicker1" value="'.$datepicker_from.'"> <img src="../typo3conf/ext/th_feedback/mod1/icon_date.gif" title="'.$title_selectdatetooltip.'" /> <input type="text" name="datepicker_to" id="datepicker2" value="'.$datepicker_to.'"> <input type="hidden" name="M" value="user_txthfeedbackM1"> <input type="submit" value="'.$LL_btn_dateselect.'" name="submit" /> <br /><br /></form>';
 		echo '</div>';
 
 		
@@ -336,7 +344,8 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 			$received         =  $row_2->received;   
 			
 			$offset=2*60*60; //converting 5 hours to seconds -> GMT+2
-			$date             =  date("d.m.Y H:i",$received+$offset);
+			$date             =  date("d.m.Y H:i",$received);
+			#$date             =  date("d.m.Y H:i",$received+$offset);
 			
 			// generate distinct pages array
 			if(!in_array($typo_page_id,$array_pages_distinct)) $array_pages_distinct[]=$typo_page_id;
@@ -424,7 +433,8 @@ class tx_thfeedback_module1 extends t3lib_SCbase {
 				
 				// generate gmt date
 				$offset=2*60*60; //converting 5 hours to seconds -> GMT+2
-				$date             =  date("d.m.Y H:i",$received+$offset);
+				$date             =  date("d.m.Y H:i",$received);
+				#$date             =  date("d.m.Y H:i",$received+$offset);
 				
 				// store results in array (page_id, typo_page_title)
 				$array_pages_results[$pid]['page_id']=$typo_page_id;
