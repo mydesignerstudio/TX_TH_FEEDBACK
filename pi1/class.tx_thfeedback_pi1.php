@@ -70,10 +70,14 @@ class tx_thfeedback_pi1 extends tslib_pibase {
 		// -------------------------------
 		// load external css / js
 		// -------------------------------
+		
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/css_1'] = '<link href="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/css/main.css" rel="stylesheet" type="text/css" />';
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/css_2'] = '<link href="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/css/ui_'.$config_css.'.css" rel="stylesheet" type="text/css" />';
+		/*
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_1'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery.js"></script>';
+        */
 		$GLOBALS ['TSFE']->additionalHeaderData [$this->extKey . '/js_2'] = '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath ( $this->extKey ) . 'pi1/js/jquery_custom_functions.js"></script>';
+		
 	
 		// -------------------------------
 		// language translations

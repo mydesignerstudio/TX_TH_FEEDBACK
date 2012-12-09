@@ -38,7 +38,7 @@ $(document).ready(function() {
 	$('#btn_yes').click(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 1;
-		$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
+		$.ajax({url:"http://www.typohosting.at/index.php?&eID=sfajax",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
 		// condition message for duplicate ip entry
 		if (result == 'duplicate_yes') {
 			$('#feedback_form').html(message_duplicate + '<input type="button" class="hidden_button" />');	
@@ -53,7 +53,7 @@ $(document).ready(function() {
 	$('#btn_no').click(function() {
 		var comment = $('input[name="textfield"]').val();
 		var helpful = 0;
-		$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
+		$.ajax({url:"http://www.typohosting.at/index.php?&eID=sfajax",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
 		// condition message for duplicate ip entry
 		if (result == 'duplicate_yes') {
 			$('#feedback_form').html(message_duplicate + '<input type="button" class="hidden_button" />');	
@@ -73,7 +73,7 @@ $(document).ready(function() {
 		else {
 			var comment = $('input[name="textfield"]').val();
 			var helpful = 2;
-			$.ajax({url:"typo3conf/ext/th_feedback/pi1/db_update.php",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
+			$.ajax({url:"http://www.typohosting.at/index.php?&eID=sfajax",data: "comment=" + comment + "&helpful=" + helpful + "&page_id=" + page_id + "&page_title=" + page_title,type: "GET",async:false,success:function(result){
 			// condition message for duplicate ip entry
 			if (result == 'duplicate_yes') {
 				$('#feedback_form').html(message_duplicate + '<input type="button" class="hidden_button" />');	
